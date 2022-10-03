@@ -2,16 +2,17 @@ import setaPlay from "./img/seta_play.png"
 import setaVirar from "./img/seta_virar.png"
 import styled from "styled-components"
 import dados from "./dados";
-import { useState } from "react";
 
-export default function Perguntas(){
+export default function Perguntas(props){
 
-  const [cardsAbertos, setCardsAbertos] =useState([]);
-  const [respostasAbertas, setRespostasAbertas] =useState([]);
+  const {respostasAbertas,setRespostasAbertas, cardsAbertos, setCardsAbertos, concluidos, rotacionar, setRotacionar, cor, icone} = props
+
+
 
   function verPergunta(index){
-    if(!cardsAbertos.includes(index)){
+    if(!cardsAbertos.includes(index) && !concluidos.includes(index)){
       setCardsAbertos([...cardsAbertos, index])
+      setRotacionar("rotateY(180deg)")
     }
     console.log(cardsAbertos)
   }
@@ -19,6 +20,7 @@ export default function Perguntas(){
   function verResposta(index){
     if(!respostasAbertas.includes(index)){
       setRespostasAbertas([...respostasAbertas, index])
+
     }
     console.log(respostasAbertas)
   }
@@ -26,11 +28,19 @@ export default function Perguntas(){
   return(
     <>
     {dados.map((d, index) => 
-    <Pergunta key={index}  numero={d.numero}
-     resposta={d.resposta} abrirPergunta={() => verPergunta(index)}
-     abrirResposta={() => verResposta(index)}>
-      {cardsAbertos.includes(index) ? <span>{d.pergunta}</span> : ""}
-    
+    <Pergunta key={index}  numero={d.numero} 
+    botao={respostasAbertas.includes(index) ? "" : setaVirar}
+     resposta={d.resposta} 
+     abrirPergunta={(cardsAbertos[cardsAbertos.length-1] === concluidos[concluidos.length-1]) ? () => verPergunta(index): ""}
+     margin={cardsAbertos.includes(index) && !concluidos.includes(index) ? "65" : ""}
+     rotacao={cardsAbertos.includes(index) && !concluidos.includes(index) ? rotacionar : ""}
+     cor={concluidos.includes(index) ? cor[index] : "#333333"}
+     risco={cardsAbertos.includes(index) ? "line-through" : ""}
+     icone={concluidos.includes(index) ? icone[index] : setaPlay}
+     >
+      {(cardsAbertos.includes(index) && !respostasAbertas.includes(index)) ? <span>{d.pergunta}</span> : ""}
+      {respostasAbertas.includes(index) ? <span>{d.resposta}</span> : ""}
+      {!respostasAbertas.includes(index) ? <img onClick={() => verResposta(index)} src={setaVirar} alt="virar" /> : ""}
      </Pergunta>)
      }
     </>
@@ -40,20 +50,26 @@ export default function Perguntas(){
 
 function Pergunta(props){
     return(
-        <>
-        <PerguntaFechada>
-            <span>{props.numero}</span>
-            <img onClick={props.abrirPergunta} src={setaPlay} alt="play"  />
+        <Carta margin={props.margin} rotacao={props.rotacao}>
+        <PerguntaFechada cor={props.cor} risco={props.risco}>
+            <p>{props.numero}</p>
+            <img onClick={props.abrirPergunta} src={props.icone} alt="play"  />
         </PerguntaFechada>
-        <PerguntaAberta>
-            {props.children}
-            <img onClick={props.abrirResposta} src={setaVirar} alt="virar" />
+        <PerguntaAberta >
+            {props.children}  
         </PerguntaAberta>
-        </>
+        </Carta>
     )
 }
 
-
+const Carta = styled.div`
+    display:flex;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all .5s;
+    margin-bottom: ${props => `${props.margin}px`}; 
+    transform: ${props => props.rotacao}; 
+`
 
 
 const PerguntaFechada = styled.div`
@@ -67,15 +83,14 @@ const PerguntaFechada = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transform-style: preserve-3d;
-    transition: all .5s;
   p{
     font-family: 'Recursive';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: #333333;
+  color: ${props => props.cor};
+  text-decoration: ${props => props.risco};
   }
 `
 
@@ -97,7 +112,9 @@ const PerguntaAberta = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  transform: rotateY(180deg);
+  position: absolute;
+  backface-visibility:hidden;
   img{
     position: absolute;
   bottom: 10px;

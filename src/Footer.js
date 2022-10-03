@@ -1,14 +1,14 @@
 import styled from "styled-components"
 
-export default function Footer(){
+export default function Footer(props){
     return(
         <FooterConcluidos>
             <ContainerBotoes>
-                <button>Não lembrei</button>
-                <button>Quase não lembrei</button>
-                <button>Zap!</button>
+                <button onClick={props.naoLembrei}>Não lembrei</button>
+                <button onClick={props.quaseNaoLembrei}>Quase não lembrei</button>
+                <button onClick={props.zap}>Zap!</button>
             </ContainerBotoes>
-            <span>0/4 concluidos</span>
+            <span>{props.numeroConcluidos}/8 concluidos</span>
         </FooterConcluidos>
     )
 }
