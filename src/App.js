@@ -6,6 +6,7 @@ import { useState } from "react"
 import certo from "./img/icone_certo.png"
 import erro from "./img/icone_erro.png"
 import quase from "./img/icone_quase.png"
+import TelaInicial from "./telaInicial"
 
 export default function App(){
 const[concluidos, setConcluidos]= useState([]);
@@ -58,8 +59,16 @@ let novoIcone;
     }
   }
 
+  
+  const [valor, setValor] = useState("flex")
+
+  function abrirApp(){
+      setValor("none")
+  }
+
     return(
         <ScreenContainer>
+          <TelaInicial abrirApp={() => abrirApp()} valor={valor}/>
             <LogoContainer>
                 <img src={logo} alt="logo" />
                 <h1>ZapRecall</h1>

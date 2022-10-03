@@ -14,7 +14,6 @@ export default function Perguntas(props){
       setCardsAbertos([...cardsAbertos, index])
       setRotacionar("rotateY(180deg)")
     }
-    console.log(cardsAbertos)
   }
 
   function verResposta(index){
@@ -22,7 +21,6 @@ export default function Perguntas(props){
       setRespostasAbertas([...respostasAbertas, index])
 
     }
-    console.log(respostasAbertas)
   }
 
   return(
@@ -31,7 +29,7 @@ export default function Perguntas(props){
     <Pergunta key={index}  numero={d.numero} 
     botao={respostasAbertas.includes(index) ? "" : setaVirar}
      resposta={d.resposta} 
-     abrirPergunta={(cardsAbertos[cardsAbertos.length-1] === concluidos[concluidos.length-1]) ? () => verPergunta(index): ""}
+     abrirPergunta={(cardsAbertos[cardsAbertos.length-1] === concluidos[concluidos.length-1]) ? () => verPergunta(index): () => verPergunta()}
      margin={cardsAbertos.includes(index) && !concluidos.includes(index) ? "65" : ""}
      rotacao={cardsAbertos.includes(index) && !concluidos.includes(index) ? rotacionar : ""}
      cor={concluidos.includes(index) ? cor[index] : "#333333"}
