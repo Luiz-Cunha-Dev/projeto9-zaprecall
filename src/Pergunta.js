@@ -29,7 +29,7 @@ export default function Perguntas(props){
     <Pergunta key={index}  numero={d.numero} 
     botao={respostasAbertas.includes(index) ? "" : setaVirar}
      resposta={d.resposta} 
-     abrirPergunta={(cardsAbertos[cardsAbertos.length-1] === concluidos[concluidos.length-1]) ? () => verPergunta(index): () => verPergunta()}
+     abrirPergunta={(cardsAbertos[cardsAbertos.length-1] === concluidos[concluidos.length-1]) ? () => verPergunta(index): ""}
      margin={cardsAbertos.includes(index) && !concluidos.includes(index) ? "65" : ""}
      rotacao={cardsAbertos.includes(index) && !concluidos.includes(index) ? rotacionar : ""}
      cor={concluidos.includes(index) ? cor[index] : "#333333"}
