@@ -12,17 +12,22 @@ const[concluidos, setConcluidos]= useState([]);
 const [cardsAbertos, setCardsAbertos] =useState([]);
 const [respostasAbertas, setRespostasAbertas] =useState([]);
 const [rotacionar, setRotacionar] =useState("rotateY(0deg)");
-const [cor, setCor] =useState([]);
-const [icone, setIcone] = useState([]);
-
+const [cor, setCor] =useState(["", "", "", "", "", "", "", ""]);
+const [icone, setIcone] = useState(["", "", "", "", "", "", "", ""]);
+let novaCor;
+let novoIcone;
 
 
   function naoLembrei(){
     if(concluidos[concluidos.length-1] !== respostasAbertas[respostasAbertas.length-1] && concluidos.length < 8 && cardsAbertos[cardsAbertos.length-1] === respostasAbertas[respostasAbertas.length-1]){
       setConcluidos([...concluidos, respostasAbertas[respostasAbertas.length-1]])
       setRotacionar("rotateY(0deg)")
-      setCor([...cor, '#FF3030'])
-      setIcone([...icone, erro])
+      novaCor= [...cor]
+      novaCor[respostasAbertas[respostasAbertas.length-1]]='#FF3030'
+      setCor(novaCor)
+      novoIcone= [...icone]
+      novoIcone[respostasAbertas[respostasAbertas.length-1]]= erro
+      setIcone(novoIcone)
     }
   }
 
@@ -30,8 +35,12 @@ const [icone, setIcone] = useState([]);
     if(concluidos[concluidos.length-1] !== respostasAbertas[respostasAbertas.length-1] && concluidos.length < 8 && cardsAbertos[cardsAbertos.length-1] === respostasAbertas[respostasAbertas.length-1]){
       setConcluidos([...concluidos, respostasAbertas[respostasAbertas.length-1]])
       setRotacionar("rotateY(0deg)")
-      setCor([...cor, '#FF922E'])
-      setIcone([...icone, quase])
+      novaCor= [...cor]
+      novaCor[respostasAbertas[respostasAbertas.length-1]]='#FF922E'
+      setCor(novaCor)
+      novoIcone= [...icone]
+      novoIcone[respostasAbertas[respostasAbertas.length-1]]= quase
+      setIcone(novoIcone)
     }
   }
 
@@ -39,8 +48,13 @@ const [icone, setIcone] = useState([]);
     if(concluidos[concluidos.length-1] !== respostasAbertas[respostasAbertas.length-1] && concluidos.length < 8 && cardsAbertos[cardsAbertos.length-1] === respostasAbertas[respostasAbertas.length-1]){
       setConcluidos([...concluidos, respostasAbertas[respostasAbertas.length-1]])
       setRotacionar("rotateY(0deg)")
-      setCor([...cor, '#2FBE34'])
+      novaCor= [...cor]
+      novaCor[respostasAbertas[respostasAbertas.length-1]]='#2FBE34'
+      setCor(novaCor)
       setIcone([...icone, certo])
+      novoIcone= [...icone]
+      novoIcone[respostasAbertas[respostasAbertas.length-1]]= certo
+      setIcone(novoIcone)
     }
   }
 
