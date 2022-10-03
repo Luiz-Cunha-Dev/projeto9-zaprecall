@@ -24,9 +24,6 @@ export default function Perguntas(props){
     }
   }
 
-  function vazia(){
-
-  }
 
   return(
     <>
@@ -41,9 +38,9 @@ export default function Perguntas(props){
      risco={cardsAbertos.includes(index) ? "line-through" : ""}
      icone={concluidos.includes(index) ? icone[index] : setaPlay}
      >
-      {(cardsAbertos.includes(index) && !respostasAbertas.includes(index)) ? <span>{d.pergunta}</span> : ""}
-      {respostasAbertas.includes(index) ? <span>{d.resposta}</span> : ""}
-      {!respostasAbertas.includes(index) ? <img onClick={() => verResposta(index)} src={setaVirar} alt="virar" /> : ""}
+      {(cardsAbertos.includes(index) && !respostasAbertas.includes(index)) ? <span data-identifier="flashcard-question" >{d.pergunta}</span> : ""}
+      {respostasAbertas.includes(index) ? <span data-identifier="flashcard-answer" >{d.resposta}</span> : ""}
+      {!respostasAbertas.includes(index) ? <img data-identifier="flashcard-turn-btn" onClick={() => verResposta(index)} src={setaVirar} alt="virar" /> : ""}
       {respostasAbertas.includes(index) ? <Botoes naoLembrei={naoLembrei} quaseNaoLembrei={quaseNaoLembrei} zap={zap}/> : ""}
      </Pergunta>)
      }
@@ -54,10 +51,10 @@ export default function Perguntas(props){
 
 function Pergunta(props){
     return(
-        <Carta margin={props.margin} rotacao={props.rotacao}>
+        <Carta margin={props.margin} rotacao={props.rotacao} data-identifier="flashcard">
         <PerguntaFechada cor={props.cor} risco={props.risco}>
-            <p>{props.numero}</p>
-            <img onClick={props.abrirPergunta} src={props.icone} alt="play"  />
+            <p data-identifier="flashcard-index-item">{props.numero}</p>
+            <img data-identifier="flashcard-status flashcard-show-btn" onClick={props.abrirPergunta} src={props.icone} alt="play"  />
         </PerguntaFechada>
         <PerguntaAberta >
             {props.children}  

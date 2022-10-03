@@ -3,9 +3,9 @@ import styled from "styled-components"
 export default function Botoes(props){
     return(
         <ContainerBotoes>
-        <button onClick={props.naoLembrei}>Não lembrei</button>
-        <button onClick={props.quaseNaoLembrei}>Quase não lembrei</button>
-        <button onClick={props.zap}>Zap!</button>
+        <button data-identifier="forgot-btn" onClick={props.naoLembrei}>Não lembrei</button>
+        <button data-identifier="almost-forgot-btn" onClick={props.quaseNaoLembrei}>Quase não lembrei</button>
+        <button data-identifier="zap-btn" onClick={props.zap}>Zap!</button>
     </ContainerBotoes>
     )
 }

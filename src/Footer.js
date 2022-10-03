@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function Footer(props){
     return(
         <FooterConcluidos>
-            <span>{props.numeroConcluidos}/8 concluidos</span>
+            <span data-identifier="flashcard-counter" >{props.numeroConcluidos}/8 concluidos</span>
             <Resutado>
             {props.children}
             </Resutado>
