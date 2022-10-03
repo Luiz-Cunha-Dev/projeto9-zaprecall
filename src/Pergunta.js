@@ -2,10 +2,11 @@ import setaPlay from "./img/seta_play.png"
 import setaVirar from "./img/seta_virar.png"
 import styled from "styled-components"
 import dados from "./dados";
+import Botoes from "./botoes";
 
 export default function Perguntas(props){
 
-  const {respostasAbertas,setRespostasAbertas, cardsAbertos, setCardsAbertos, concluidos, rotacionar, setRotacionar, cor, icone} = props
+  const {respostasAbertas,setRespostasAbertas, cardsAbertos, setCardsAbertos, concluidos, rotacionar, setRotacionar, cor, icone, naoLembrei, quaseNaoLembrei, zap} = props
 
 
 
@@ -23,13 +24,17 @@ export default function Perguntas(props){
     }
   }
 
+  function vazia(){
+
+  }
+
   return(
     <>
     {dados.map((d, index) => 
     <Pergunta key={index}  numero={d.numero} 
     botao={respostasAbertas.includes(index) ? "" : setaVirar}
      resposta={d.resposta} 
-     abrirPergunta={(cardsAbertos[cardsAbertos.length-1] === concluidos[concluidos.length-1]) ? () => verPergunta(index): ""}
+     abrirPergunta={(cardsAbertos[cardsAbertos.length-1] === concluidos[concluidos.length-1]) ? () => verPergunta(index): () => 1}
      margin={cardsAbertos.includes(index) && !concluidos.includes(index) ? "65" : ""}
      rotacao={cardsAbertos.includes(index) && !concluidos.includes(index) ? rotacionar : ""}
      cor={concluidos.includes(index) ? cor[index] : "#333333"}
@@ -39,6 +44,7 @@ export default function Perguntas(props){
       {(cardsAbertos.includes(index) && !respostasAbertas.includes(index)) ? <span>{d.pergunta}</span> : ""}
       {respostasAbertas.includes(index) ? <span>{d.resposta}</span> : ""}
       {!respostasAbertas.includes(index) ? <img onClick={() => verResposta(index)} src={setaVirar} alt="virar" /> : ""}
+      {respostasAbertas.includes(index) ? <Botoes naoLembrei={naoLembrei} quaseNaoLembrei={quaseNaoLembrei} zap={zap}/> : ""}
      </Pergunta>)
      }
     </>

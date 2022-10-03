@@ -77,8 +77,8 @@ let novoIcone;
                 <img src={logo} alt="logo" />
                 <h1>ZapRecall</h1>
             </LogoContainer>
-        <Perguntas icone={icone} cor={cor} cardsAbertos={cardsAbertos} setCardsAbertos={setCardsAbertos} rotacionar={rotacionar} setRotacionar={setRotacionar} concluidos={concluidos} setRespostasAbertas={setRespostasAbertas} respostasAbertas={respostasAbertas}/>
-        <Footer numeroConcluidos={concluidos.length} naoLembrei={() =>naoLembrei()} quaseNaoLembrei={() => quaseNaoLembrei()} zap={() => zap()} >
+        <Perguntas naoLembrei={() =>naoLembrei()} quaseNaoLembrei={() => quaseNaoLembrei()} zap={() => zap()}  icone={icone} cor={cor} cardsAbertos={cardsAbertos} setCardsAbertos={setCardsAbertos} rotacionar={rotacionar} setRotacionar={setRotacionar} concluidos={concluidos} setRespostasAbertas={setRespostasAbertas} respostasAbertas={respostasAbertas}/>
+        <Footer numeroConcluidos={concluidos.length} >
           {resultado.map((r, index) => <img src={r} key={index} alt={r}/>)}
         </Footer>
         </ScreenContainer>
