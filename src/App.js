@@ -15,6 +15,7 @@ const [respostasAbertas, setRespostasAbertas] =useState([]);
 const [rotacionar, setRotacionar] =useState("rotateY(0deg)");
 const [cor, setCor] =useState(["", "", "", "", "", "", "", ""]);
 const [icone, setIcone] = useState(["", "", "", "", "", "", "", ""]);
+const [resultado, setResutado] = useState([]);
 let novaCor;
 let novoIcone;
 
@@ -29,6 +30,7 @@ let novoIcone;
       novoIcone= [...icone]
       novoIcone[respostasAbertas[respostasAbertas.length-1]]= erro
       setIcone(novoIcone)
+      setResutado([...resultado, erro])
     }
   }
 
@@ -42,6 +44,7 @@ let novoIcone;
       novoIcone= [...icone]
       novoIcone[respostasAbertas[respostasAbertas.length-1]]= quase
       setIcone(novoIcone)
+      setResutado([...resultado, quase])
     }
   }
 
@@ -56,10 +59,11 @@ let novoIcone;
       novoIcone= [...icone]
       novoIcone[respostasAbertas[respostasAbertas.length-1]]= certo
       setIcone(novoIcone)
+      setResutado([...resultado, certo])
     }
   }
 
-  
+
   const [valor, setValor] = useState("flex")
 
   function abrirApp(){
@@ -74,7 +78,9 @@ let novoIcone;
                 <h1>ZapRecall</h1>
             </LogoContainer>
         <Perguntas icone={icone} cor={cor} cardsAbertos={cardsAbertos} setCardsAbertos={setCardsAbertos} rotacionar={rotacionar} setRotacionar={setRotacionar} concluidos={concluidos} setRespostasAbertas={setRespostasAbertas} respostasAbertas={respostasAbertas}/>
-        <Footer numeroConcluidos={concluidos.length} naoLembrei={() =>naoLembrei()} quaseNaoLembrei={() => quaseNaoLembrei()} zap={() => zap()} />
+        <Footer numeroConcluidos={concluidos.length} naoLembrei={() =>naoLembrei()} quaseNaoLembrei={() => quaseNaoLembrei()} zap={() => zap()} >
+          {resultado.map((r, index) => <img src={r} key={index} alt={r}/>)}
+        </Footer>
         </ScreenContainer>
     )
 }

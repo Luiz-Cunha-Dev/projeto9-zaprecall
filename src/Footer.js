@@ -9,10 +9,25 @@ export default function Footer(props){
                 <button onClick={props.zap}>Zap!</button>
             </ContainerBotoes>
             <span>{props.numeroConcluidos}/8 concluidos</span>
+            <Resutado>
+            {props.children}
+            </Resutado>
         </FooterConcluidos>
     )
 }
 
+const Resutado = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 30px;
+img{
+  height: 23px;
+  width: 23px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+`
 
 const FooterConcluidos = styled.div`
   width: 100%;
